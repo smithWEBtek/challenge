@@ -32,6 +32,8 @@ function loadHandler(event) {
 	processData(csv);
 }
 
+
+//format CSV rows to arrays
 function processData(csv) {
     var allTextLines = csv.split(/\r\n|\n/);
     var lines = [];
@@ -39,6 +41,8 @@ function processData(csv) {
         lines.push(allTextLines.shift().split(','));
       }
 
+
+//for each array/row, identify indices to make into data objects
 var i;
 for (i = 0; i < lines.length; i++) {
     const firstName = (lines[i][0])
@@ -51,6 +55,19 @@ for (i = 0; i < lines.length; i++) {
 
 
 
+//if the string is empty, have a way to send data
+if (firstName === null){
+  firstName = "not available"
+}
+
+if (email === null){
+  email = "not available"
+}
+
+if (customerType === null){
+  customerType = "not available"
+}
+
 
 let sendData = JSON.stringify({
   "name": `${firstName} ${lastName}`,
@@ -62,12 +79,12 @@ let sendData = JSON.stringify({
   ],
   "phones": [
     {
-      "type": "work",
-      "phone": workPhone
-    },
-    {
       "type": "home",
       "phone": homePhone
+    },
+    {
+      "type": "work",
+      "phone": workPhone
     },
   ],
   "urls": [
@@ -83,7 +100,9 @@ let sendData = JSON.stringify({
   ],
   "locale": "en_US",
   "tags": [
-    customerType
+    "cool customer",
+    "nice",
+    `this customer is a ${customerType}`
   ],
   "birthday": birthday
 })
@@ -103,13 +122,18 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 
-xhr.open("POST", "https://api.kustomerapp.com/v1/customers");
+xhr.open("POST", "https://cors-anywhere.herokuapp.com/https://api.kustomerapp.com/v1/customers");
 xhr.setRequestHeader("authorization", `Bearer ${token}`);
 xhr.setRequestHeader("content-type", "application/json");
 
 
+xhr.send(sendData);
+
 
 }
+
+
+
 
 
 }
@@ -126,3 +150,16 @@ function errorHandler(evt) {
 		alert("Canno't read file !");
 	}
 }
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://api.kustomerapp.com/v1/customers");
+xhr.setRequestHeader("authorization", `Bearer ${token}`);
+xhr.setRequestHeader("content-type", "application/json");
