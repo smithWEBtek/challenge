@@ -49,8 +49,8 @@ for (i = 0; i < lines.length; i++) {
     const lastName = (lines[i][1])
     const email = (lines[i][2])
     const birthday = new Date(lines[i][3])
-    const homePhone = (lines[i][4]).replace('1-', '').replace('+1', '')
-    const workPhone = (lines[i][5]).replace('1-', '').replace('+1', '')
+    const homePhone = (lines[i][4]).replace('1-', '')
+    const workPhone = (lines[i][5]).replace('1-', '')
     const customerType = (lines[i][6])
 
 //1- is a problem in phones
