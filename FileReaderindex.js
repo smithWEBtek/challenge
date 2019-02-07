@@ -48,10 +48,12 @@ for (i = 0; i < lines.length; i++) {
     const firstName = (lines[i][0])
     const lastName = (lines[i][1])
     const email = (lines[i][2])
-    const birthday = (lines[i][3])
-    const homePhone = (lines[i][4])
-    const workPhone = (lines[i][5])
+    const birthday = new Date(lines[i][3])
+    const homePhone = (lines[i][4]).replace('1-', '').replace('+1', '')
+    const workPhone = (lines[i][5]).replace('1-', '').replace('+1', '')
     const customerType = (lines[i][6])
+
+//1- is a problem in phones
 
 
 
@@ -73,7 +75,6 @@ let sendData = JSON.stringify({
   "name": `${firstName} ${lastName}`,
   "emails": [
     {
-      "type": "home",
       "email": email
     }
   ],
@@ -85,7 +86,7 @@ let sendData = JSON.stringify({
     {
       "type": "work",
       "phone": workPhone
-    },
+    }
   ],
   "urls": [
     {
@@ -104,10 +105,10 @@ let sendData = JSON.stringify({
     "nice",
     `this customer is a ${customerType}`
   ],
-  "birthday": birthday
+  "birthdayAt": birthday
 })
 
-console.log(sendData)
+// console.log(sendData)
 
 
 
@@ -147,19 +148,19 @@ xhr.send(sendData);
 
 function errorHandler(evt) {
 	if(evt.target.error.name == "NotReadableError") {
-		alert("Canno't read file !");
+		alert("Cannot read file !");
 	}
 }
 
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
-
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === this.DONE) {
-    console.log(this.responseText);
-  }
-});
-
-xhr.open("GET", "https://api.kustomerapp.com/v1/customers");
-xhr.setRequestHeader("authorization", `Bearer ${token}`);
-xhr.setRequestHeader("content-type", "application/json");
+// var xhr = new XMLHttpRequest();
+// xhr.withCredentials = true;
+//
+// xhr.addEventListener("readystatechange", function () {
+//   if (this.readyState === this.DONE) {
+//     console.log(this.responseText);
+//   }
+// });
+//
+// xhr.open("GET", "https://api.kustomerapp.com/v1/customers");
+// xhr.setRequestHeader("authorization", `Bearer ${token}`);
+// xhr.setRequestHeader("content-type", "application/json");
