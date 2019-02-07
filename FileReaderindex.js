@@ -90,6 +90,28 @@ let sendData = JSON.stringify({
 
 console.log(sendData)
 
+
+
+// MAKE POST REQUEST (from Kustomer Docs):
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://api.kustomerapp.com/v1/customers");
+xhr.setRequestHeader("content-type", "application/json")
+xhr.setRequestHeader("authorization", `${token}`);
+
+xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+xhr.send(sendData);
+
+
+
 }
 
 
@@ -107,27 +129,3 @@ function errorHandler(evt) {
 		alert("Canno't read file !");
 	}
 }
-
-
-
-
-
-
-
-
-//MAKE POST REQUEST (from Kustomer Docs):
-
-// var xhr = new XMLHttpRequest();
-// xhr.withCredentials = true;
-//
-// xhr.addEventListener("readystatechange", function () {
-//   if (this.readyState === this.DONE) {
-//     console.log(this.responseText);
-//   }
-// });
-//
-// xhr.open("POST", "https://api.kustomerapp.com/v1/customers");
-// xhr.setRequestHeader("authorization", `${token}`);
-// xhr.setRequestHeader("content-type", "application/json");
-//
-// xhr.send(data);
