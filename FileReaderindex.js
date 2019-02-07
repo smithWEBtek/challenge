@@ -95,7 +95,7 @@ console.log(sendData)
 // MAKE POST REQUEST (from Kustomer Docs):
 
 var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
+xhr.withCredentials = false;
 
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === this.DONE) {
@@ -104,11 +104,8 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("POST", "https://api.kustomerapp.com/v1/customers");
-xhr.setRequestHeader("content-type", "application/json")
-xhr.setRequestHeader("authorization", `${token}`);
-
-xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-xhr.send(sendData);
+xhr.setRequestHeader("authorization", `Bearer ${token}`);
+xhr.setRequestHeader("content-type", "application/json");
 
 
 
