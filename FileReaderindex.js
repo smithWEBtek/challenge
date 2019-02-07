@@ -45,19 +45,23 @@ function processData(csv) {
 //for each array/row, identify indices to make into data objects
 var i;
 for (i = 0; i < lines.length; i++) {
-    const firstName = (lines[i][0])
-    const lastName = (lines[i][1])
-    const email = (lines[i][2])
-    const birthday = new Date(lines[i][3])
-    const homePhone = (lines[i][4]).replace('1-', '')
-    const workPhone = (lines[i][5]).replace('1-', '')
-    const customerType = (lines[i][6])
+    let firstName = (lines[i][0])
+    let lastName = (lines[i][1])
+    let email = (lines[i][2]).toLowerCase()
+    let birthday = new Date(lines[i][3])
+    let homePhone = '+1'+(lines[i][4]).replace('1-', '').replace('-','').replace(' ','').replace('(','').replace(')','').replace('.','')
+    let workPhone = '+1'+(lines[i][5]).replace('1-', '').replace('-','').replace(' ','').replace('(','').replace(')','').replace('.','')
+    let customerType = (lines[i][6])
 
 //1- is a problem in phones
 
 
+//phone is not in the right format
 
-//if the string is empty, have a way to send data
+
+
+
+// if the string is empty, have a way to send data
 if (firstName === null){
   firstName = "not available"
 }
@@ -75,17 +79,20 @@ let sendData = JSON.stringify({
   "name": `${firstName} ${lastName}`,
   "emails": [
     {
-      "email": email
+      "email": email,
+      "verified": false,
+      "type": "home"
     }
   ],
   "phones": [
     {
-      "type": "home",
-      "phone": homePhone
+      "phone": homePhone,
+      "verified": false,
+        "type": "home"
     },
     {
-      "type": "work",
-      "phone": workPhone
+      "phone": workPhone,
+      "type": "work"
     }
   ],
   "urls": [
@@ -100,15 +107,15 @@ let sendData = JSON.stringify({
     }
   ],
   "locale": "en_US",
+    "birthdayAt": birthday,
   "tags": [
     "cool customer",
     "nice",
     `this customer is a ${customerType}`
   ],
-  "birthdayAt": birthday
 })
 
-// console.log(sendData)
+console.log(sendData)
 
 
 
