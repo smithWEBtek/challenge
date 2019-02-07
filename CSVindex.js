@@ -1,33 +1,56 @@
-//csv file parsed
-//use file reader for google spreadsheet
+//csv file parsed using CSV to json
 
+
+const csvFile = './data.csv'
 const spreadsheet = "https://docs.google.com/spreadsheets/d/1FPYh5c8LY70TlJAS5X2oHASfNWbKPeQEBtTD13y6YEY/edit?ts=58f10dfb#gid=0"
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNWFmZTg0YWViNTY1MDA4ZTgzOWY0MSIsInVzZXIiOiI1YzVhZmU4NGI4NTMyYzAwMTkxYzI4NmYiLCJvcmciOiI1YzVhMDYxMjJlYWM4ODAwMTlmMmU0MTkiLCJvcmdOYW1lIjoienp6LXNhcmFoIiwidXNlclR5cGUiOiJtYWNoaW5lIiwicm9sZXMiOlsib3JnLmFkbWluIiwib3JnLnVzZXIiXSwiZXhwIjoxNTUwMDcyMDY3LCJhdWQiOiJ1cm46Y29uc3VtZXIiLCJpc3MiOiJ1cm46YXBpIiwic3ViIjoiNWM1YWZlODRiODUzMmMwMDE5MWMyODZmIn0.7JtzujViP56W-Vv6e7W4Agb30Txg4WrASeaCXDs_eYk"
 
+//7 array indices per customer, 6 commas per row
+//create an object for every 6 commas that will parse the info correctly
+//for each customer, create a data object with their information
 
 
 
+
+
+//LOOK UP VAR/LET/CONST
+let object.firstName = // Before every first comma
+let object.lastName = // Before every second comma
+
+//combine first and last to make full name LOOK UP PROPER STRINGIFY
+let object.fullName = (object.firstName + object.lastName).to_string
+
+let object.email = //before every third comma
+let object.birthday = //before every fourth comma
+let object.homePhone = //before every fifth comma
+let object.workPhone = //before every sixth comma
+let object.customerType = //after every sixth comma
+
+
+
+
+
+.forEach(person)
+
+
+//birthday?
 var data = JSON.stringify({
-  "name": "John Smith",
+  "name": data.name,
   "emails": [
     {
       "type": "home",
-      "email": "johnsmith@example.com"
+      "email": data.email
     }
   ],
   "phones": [
     {
       "type": "work",
-      "phone": "+18005551212"
-    }
-  ],
-  "socials": [
+      "phone": object.workPhone
+    },
     {
-      "type": "twitter",
-      "userid": "1234",
-      "username": "@johnsmith",
-      "url": "http://twitter.com/johnsmith"
-    }
+      "type": "home",
+      "phone": object.homePhone
+    },
   ],
   "urls": [
     {
@@ -41,15 +64,20 @@ var data = JSON.stringify({
     }
   ],
   "locale": "en_US",
-  "gender": "m",
   "tags": [
-    "cool customer",
-    "nice"
+    object.customerType
   ]
 });
 
-const data = './data.txt'.split(',')
+
+
+
+
 console.log(data)
+
+
+
+//MAKE POST REQUEST (from Kustomer Docs):
 
 
 // var xhr = new XMLHttpRequest();
