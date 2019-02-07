@@ -37,30 +37,70 @@ function processData(csv) {
     var lines = [];
     while (allTextLines.length) {
         lines.push(allTextLines.shift().split(','));
+      }
+
+var i;
+for (i = 0; i < lines.length; i++) {
+    const firstName = (lines[i][0])
+    const lastName = (lines[i][1])
+    const email = (lines[i][2])
+    const birthday = (lines[i][3])
+    const homePhone = (lines[i][4])
+    const workPhone = (lines[i][5])
+    const customerType = (lines[i][6])
+
+
+
+
+let sendData = JSON.stringify({
+  "name": `${firstName} ${lastName}`,
+  "emails": [
+    {
+      "type": "home",
+      "email": email
     }
-	console.log(lines);
-	drawOutput(lines);
+  ],
+  "phones": [
+    {
+      "type": "work",
+      "phone": workPhone
+    },
+    {
+      "type": "home",
+      "phone": homePhone
+    },
+  ],
+  "urls": [
+    {
+      "url": "https://kustomer.com"
+    }
+  ],
+  "locations": [
+    {
+      "type": "work",
+      "address": "530 7th Ave, New York, NY 10018"
+    }
+  ],
+  "locale": "en_US",
+  "tags": [
+    customerType
+  ],
+  "birthday": birthday
+})
+
+console.log(sendData)
+
 }
 
-//if your csv file contains the column names as the first line
-function processDataAsObj(csv){
-    var allTextLines = csv.split(/\r\n|\n/);
-    var lines = [];
 
-    //first line of csv
-    var keys = allTextLines.shift().split(',');
-
-    while (allTextLines.length) {
-        var arr = allTextLines.shift().split(',');
-        var obj = {};
-        for(var i = 0; i < keys.length; i++){
-            obj[keys[i]] = arr[i];
-	}
-        lines.push(obj);
-    }
-        console.log(lines);
-	drawOutputAsObj(lines);
 }
+
+
+
+
+
+
+
 
 function errorHandler(evt) {
 	if(evt.target.error.name == "NotReadableError") {
@@ -71,7 +111,7 @@ function errorHandler(evt) {
 
 
 
-//I downloaded the data as a CSV and opened it in my text editor
+
 
 
 
